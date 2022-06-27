@@ -2,14 +2,13 @@ class NodeBST {
     
       constructor(_value) {
         this.value=_value;
-        this.color = "hsl(" + _value + ", 100%, 90%)"
         this.parent = this.right = this.left = null;
-        this.x = this.x2 = 50;
+        this.x = this.x2 = windowWidth/2;
         this.y = this.y2 = 50;
         this.depth = 0;
         this.order = 0 ;
         this.fixed = false;
-        this.size=50;
+        this.size=30;
       }
       
       getDepth(){
@@ -86,6 +85,14 @@ class NodeBST {
         this.y = _y;
 
       }
+
+      drawLine(){
+        if(this.parent && this.fixed == true ){
+          strokeWeight(2);
+          stroke(this.value%360,45,100);
+          line(this.x2,this.y2,this.parent.x2,this.parent.y2);
+        }
+      }
       
       drawNode(){
           if(Math.abs(this.x - this.x2) > 0.01){
@@ -94,16 +101,13 @@ class NodeBST {
           if(Math.abs(this.y - this.y2) > 0.01){
             this.y2 += (this.y - this.y2) *0.1;
           } 
-          colorMode(HSB);
-          fill(this.value%255,50,50);
+          fill(this.value%360,15,50);
           strokeWeight(2);
-          if(this.parent && this.fixed == true ){
-            
-            line(this.x2,this.y2,this.parent.x2,this.parent.y2);
-          }
+          stroke(this.value%360,45,100);
           ellipse(this.x2,this.y2,this.size,this.size);
           strokeWeight(0);
-          text(this.value,this.x2,this.y2+this.size);
+          fill(255,0,255);
+          text(this.value,this.x2,this.y2+4);
           if(Math.abs(this.x - this.x2) < 2 && Math.abs(this.y - this.y2) < 2) this.fixed=true;
       }
       

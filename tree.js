@@ -9,7 +9,7 @@ class BST{
 
       insert(value){
             newNode = new NodeBST(value);
-            if(this._search(this.radice,newNode)) return null;
+            if(this._search(this.radice,value)) return null;
             var ptr = this.radice;
             var padre = ptr;
 
@@ -17,8 +17,8 @@ class BST{
                   newNode.setOrder(1);
                   newNode.setDepth(0);
                   this.radice = newNode;
-                  this.radice.setX(675);
-                  this.radice.setY(40);
+                  this.radice.setX(windowWidth/2);
+                  this.radice.setY(250);
                   this.fixMethod();
                   return this.radice;
             }
@@ -57,23 +57,15 @@ class BST{
       
 
       _search(node,key){
-            let ptr = node;
-            while(ptr){
-                if(key.value > ptr.getValue()){ 
-                  ptr = ptr.getRight();
-                }
-                else if (key.value < ptr.getValue()){                
-                  ptr = ptr.getLeft();
-                }
-                else{
-                  targetNode=ptr;
+            if(!node) return null;
+            if(node.getValue()==key){
+                  console.log("Found node");
+                  targetNode = node;
                   return true;
-                }
-              }
-         }
+            } 
 
-      search(key){
-            this._search(this.radice,key);
+            if(key > node.getValue()) this._search(node.getRight(),key);
+            else  this._search(node.getLeft(),key);
       }
 
       succ(node){
@@ -100,7 +92,6 @@ class BST{
       canc(key){
             this._search(this.radice,key);
             var tmp = targetNode;
-            console.log(tmp.getValue());
             if(tmp) this._canc(tmp,key);
             targetNode=null;
             this.fixMethod();
@@ -111,19 +102,14 @@ class BST{
             printArray2=printArray;
             printArray=[];
             this.fixTree();
-            this.fixTree(); 
             this.preOrder();
+            this.fixTree();
       }
 
       _canc(node, key){
-            // if(!node) return; <- controllo non necessario;
-            console.log("HGLLO");
             if(node.getLeft()&&node.getRight()){
                 let successore = this.succ(node);
                 node.setValue( successore.getValue() );
-                //this.fixSonsY(node.left,node.size);
-                 //this.fixSonsY(node.right,node.size);
-                this.fixMethod();
                 this._canc( successore, successore.getValue() );
             }
 
@@ -153,6 +139,8 @@ class BST{
                 else {
                   padre.setLeft(child);
                 }
+
+
                 
                this.fixMethod();
                return;
@@ -220,8 +208,8 @@ class BST{
     fixTree(node = this.radice){
           if(node==null) return;
           this.fixTree(node.getRight());
-          this.fix(node);
           this.fixTree(node.getLeft()); 
+          this.fix(node);
           
     }
 

@@ -9,19 +9,27 @@
   <script language="javascript" type="text/javascript" src="script.js"></script>
   <script language="javascript" type="text/javascript" src="tree.js"></script>
   <script language="javascript" type="text/javascript" src="treeNode.js"></script>
-  <script language="javascript" type="text/javascript" src="treealternatve.js"></script>
+  <script language="javascript" type="text/javascript" src="main.js"></script>
   <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
 
   <!-- This line removes any default padding and style.
        You might only need one of these values set. -->
-  <style> body { padding: 0; margin: 0; background-color: #E0FFF1; } </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 </body>
-<button id="randomValueButton" onclick="addRandomValue()">Add Random Node</button>
-<button id="singleValueButton" onclick="addValue()">Insert Value</button>
-<button id="cancSingleValueButton" onclick="cancValue()">Canc Value</button>
-<input type="number" id="inputValue" value="Max Value is 999">
+<div class="container">
+  <div class="header">BST Visualizer</div>
+  <div class="topBar">
+    <button id="randomValueButton" class="button" onclick="addRandomValue()">Add Random Value</button>
+    <button id="singleValueButton" class="button" onclick="addValue()">Insert Value</button>
+    <button id="cancSingleValueButton" class="button" onclick="cancValue()">Delete Value</button>
+    <div class="inputDiv" >
+      <input type="number" id="inputValue"  placeholder="Insert a numeric value" value="Max Value is 999">
+    </div>
+  </div>
+</div>
+
 
 </html>

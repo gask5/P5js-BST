@@ -41,12 +41,8 @@ class BST{
                   newNode.setX(newNode.getParent().getX()-newNode.size/2);
                   padre.setLeft(newNode);
             }
-            
-            
             newNode.setDepth(newNode.getParent().getDepth()+1);
             newNode.setY(newNode.getDepth()*newNode.size+50);
-            
-           
             this.fixMethod();
             return newNode;
       }
@@ -55,7 +51,6 @@ class BST{
         return this.radice;
       }
       
-
       _search(node,key){
             if(!node) return null;
             if(node.getValue()==key){
@@ -63,19 +58,16 @@ class BST{
                   targetNode = node;
                   return true;
             } 
-
             if(key > node.getValue()) this._search(node.getRight(),key);
             else  this._search(node.getLeft(),key);
       }
 
       succ(node){
             if(node.getRight()) return this.minimo(node.getRight());
-            
             let p = node.getParent() ;
             while(p && node.getValue() > p.getValue()){
                 p = p.getParent();
             }
-
             return p;
         }
 
@@ -112,52 +104,34 @@ class BST{
                 node.setValue( successore.getValue() );
                 this._canc( successore, successore.getValue() );
             }
-
             else{
-                
                 let child = node.getRight();
                 if(!child) child = node.getLeft();
-
                 let padre = node.getParent();
-
                 if(child){
                   child.setParent(padre);
                   child.setDepth(child.depth-1);
                 }
-
                 if(!padre) {
                     this.radice = child;
                     this.fixMethod();
                     return;
                 }
-
-               
-
                 if(node.getValue() >= padre.getValue()){
                   padre.setRight(child);
                 } 
                 else {
                   padre.setLeft(child);
                 }
-
-
-                
                this.fixMethod();
                return;
                 
             }
         }
-      // print() {    text(printArray[d].getValue(),(1400-(Math.pow(2,printArray[d].getDepth()))*60)/2+printArray[d].getOrder()*60 ,100+printArray[d].getDepth()*100);  
-      //       print(this.radice);
-      // }
       
       preOrder(node = this.radice){
             if(node==null) return;
-            //console.log(node.getValue()+ " ");
             printArray.push(node);
-            //node.drawNode();
-            //text(node.getValue(),node.getX()-5,node.getY());
-            //if(node.getParent()) line(node.getX(),node.getY(),node.getParent().getX(),node.getParent().getY());
             this.preOrder(node.getLeft()); 
             this.preOrder(node.getRight());   
       }
@@ -166,32 +140,20 @@ class BST{
         let parent = node.getParent();
         if(parent == null) return;
         let min = node.minimo(node);
-        //console.log(document.getElementById(tmp.getValue()).style.marginLeft);
-  
-       
         if (min.x - node.size/1.5 < parent.x && node.x >= parent.x){
               this.fixSons(node,node.size/1.5);
         }
   
         let max = node.massimo(node);
-  
-         
-        //console.log(max.getValue() + " " + parent.getValue())
-  
         if (max.x + node.size/1.5 > parent.x && node.x <= parent.x){
               this.fixSons(node,-node.size/1.5);
         }
       }
 
-      //connect(document.getElementById(node.getValue()),document.getElementById(node.getParent().getValue()), "#000" , 1);
-
     fixSons(n , delta){
           if (n==null) return;
-
-          
           this.fixSons(n.left, delta);
           this.fixSons(n.right, delta);
-          
           n.setX(n.getX()+delta);
           n.depth=n.parent.depth+1;
           n.setY(n.parent.y+n.size);
@@ -209,19 +171,6 @@ class BST{
           if(node==null) return;
           this.fixTree(node.getRight());
           this.fixTree(node.getLeft()); 
-          this.fix(node);
-          
-    }
-
-
-      
-        
+          this.fix(node);  
+    }   
 };
-
-function drawBST(){
-  for( d in printArray){
-    ellipse((1400-(Math.pow(2,printArray[d].getDepth()))*60)/2+printArray[d].getOrder()*60 ,100+printArray[d].getDepth()*100,50,50);
-    text(printArray[d].getValue(),(1400-(Math.pow(2,printArray[d].getDepth()))*60)/2+printArray[d].getOrder()*60 ,100+printArray[d].getDepth()*100);  
-    if(printArray[d].getParent()) line((1400-(Math.pow(2,printArray[d].getDepth()))*60)/2+printArray[d].getOrder()*60,100+printArray[d].getDepth()*100,(1400-(Math.pow(2,printArray[d].getParent().getDepth()))*60)/2+printArray[d].getParent().getOrder()*60,100+printArray[d].getParent().getDepth()*100);
-}
-}

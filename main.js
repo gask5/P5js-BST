@@ -23,11 +23,23 @@ function setup() {
 
 function draw() {
   background(0, 0, 10);
+  drawLines();
+  drawNodes();
+  findNode();
+  drawAnimation()
+}
+
+function drawLines(){
   for(d in printArray2)
     printArray2[d].drawLine();
+}
+
+function drawNodes(){
   for(d in printArray2)
     printArray2[d].drawNode();
-  findNode();
+}
+
+function drawAnimation(){
   if(visualNewNode){
     if(placeHolder) placeHolder.drawNode();
     stroke(350, 88, 84);
@@ -86,7 +98,7 @@ function insertAnim(valueToInsert){
 
 function cancAnim(valueToDelete){
   enablePlaceHolder(valueToDelete);
-    toDelete = valueToDelete;
+  toDelete = valueToDelete;
 }
 
 function enablePlaceHolder(value){

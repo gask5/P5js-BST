@@ -5,7 +5,7 @@ Binary Search Tree visualizer made with P5js.
 # Demo
 [Link](https://gask5.github.io/P5js-BST/)
 
-# Current Feature
+# Current Features
 - *Add random ralue*
   - Add a random generated value from 0 to 1000.
 - *Insert custom value*
